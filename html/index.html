@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Panda Doodle</title>
+  <meta name='description' content="Panda Doodle is a challenging drawing puzzle game. Link paws to doodles using the matching colors. Draw over another color to mix them and create a new color. Try to use the least amount of ink to get 3 stars!" />
+  
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <meta name="theme-color" content="#000000" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" href="https://pandadoodle.lucamoller.com/static/icon_original.png" />
+  <link rel="manifest" href="/static/manifestv1.webmanifest" />
+
+  <meta property="og:url" content="https://pandadoodle.lucamoller.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Panda Doodle - Drawing Puzzle" />
+  <meta property="og:description" content="Panda Doodle is a challenging drawing puzzle game. Link paws to doodles using the matching colors. Draw over another color to mix them and create a new color. Try to use the least amount of ink to get 3 stars!" />
+  <meta property="og:image" content="https://pandadoodle.lucamoller.com/static/banner.jpg" />
+
+  <style>
+    @font-face {
+      font-family: 'Oregano-Regular';
+      src: url('/static/Oregano-Regular.ttf');
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+      position: fixed;
+      margin: 0;
+    }
+
+    #consolelog-div {
+      display: none;
+      max-height: 100vh;
+      overflow: hidden;
+      position: absolute;
+      z-index: 10;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.4);
+      pointer-events:none; 
+      touch-action:none;
+    }
+
+    #loading-div {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      display: table;
+      vertical-align: middle;
+    }
+
+    #loading-text {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      font-size: 24px;
+    }
+  </style>
+
+  <script src="/static/libs/howler@2.2.3.min.js"></script>
+
+  <script>
+    howler_audios = {};
+    window.howler_bindings = {};
+    window.howler_bindings.loadAudio = function(src, ios) {
+      let howl_arguments = {
+        src: [src],
+        preload: true
+      };
+      if (ios) {
+        howl_arguments["html5"] = true;
+      }
+      howler_audios[src] = new Howl(howl_arguments);
+    }
+    window.howler_bindings.play = function(src) {
+      howler_audios[src].play();
+    }
+    window.howler_bindings.pause = function(src) {
+      howler_audios[src].pause();
+    }
+    window.howler_bindings.isPlaying = function(src) {
+      return howler_audios[src].playing();
+    }
+    window.howler_bindings.setVolume = function(src, volume) {
+      howler_audios[src].volume(volume);
+    }
+    window.howler_bindings.setLoop = function(src, looped) {
+      howler_audios[src].loop(looped);
+    }
+    window.howler_bindings.setSeek = function(src, position_secs) {
+      howler_audios[src].seek(position_secs);
+    }
+    window.howler_bindings.getSeek = function(src) {
+      return howler_audios[src].seek();
+    }
+    window.howler_bindings.isLoaded = function(src) {
+      return howler_audios[src].state() == "loaded";
+    }
+  </script>
+
+  <script>
+    if (navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPad") != -1) {
+      // Disable service worker on iOS, it's causing trouble with audio.
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration in registrations) {
+            registration.unregister();
+          } 
+        });
+      }
+    } else {
+      // Other Platforms.
+      if (navigator.serviceWorker) {
+        if (navigator.serviceWorker.controller) {
+        console.log("Active service worker found");
+      } else {
+          navigator.serviceWorker.register("sw.js", {
+            scope: "./"
+          })
+          .then(function (reg) {
+            console.log("Service worker registered");
+          });
+        }
+      }
+    }
+    
+
+    window.iOSstandalone = function() {
+      return ('standalone' in window.navigator) && (window.navigator.standalone);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="consolelog-div"></div>
+  <div id="loading-div">
+    <span id="loading-text">
+      Loading...
+    </span>
+  </div>
+</body>
+
+<script src="index.js"></script>
+
+<!-- Experimenting with https://statsig.com/ for A/B tests-->
+<script>
+  let statsigEnabled = false;
+  let statsigGates = "{}";
+  window.statsig_rustbindings = {};
+  window.statsig_rustbindings.getStatsigEnabled = function () {
+    return statsigEnabled;
+  }
+  window.statsig_rustbindings.getStatsigGates = function () {
+    return statsigGates;
+  }
+  window.statsig_rustbindings.logEvent = function (eventName) {
+    statsig.logEvent(eventName);
+  }
+  window.statsig_rustbindings.logEventWithValue = function (eventName, eventValue) {
+    statsig.logEvent(eventName, eventValue);
+  }
+
+  function getStatsigUserId() {
+    let queryParams = new URLSearchParams(window.location.search);
+    let statsigUserId = queryParams.get("statsigUserId");
+    if (statsigUserId != null) {
+      window.localStorage.setItem("StatsigUserId", statsigUserId);
+      return statsigUserId;
+    }
+    return window.localStorage.getItem("StatsigUserId");
+  }
+
+  let statsigUserId = getStatsigUserId();
+  if (statsigUserId) {
+    let statsigScript = window.document.createElement("script");
+    statsigScript.setAttribute("src", "https://cdn.jsdelivr.net/npm/statsig-js/dist/statsig-prod-web-sdk.min.js");
+    document.head.appendChild(statsigScript);
+
+    let initializeInterval = setInterval(function() {
+      if (!window.statsig) {
+        // statsig js not loaded yet.
+        return;
+      }
+      clearInterval(initializeInterval);
+
+      let statsigUser = {userID: statsigUserId};
+      let statsigExtraParams = {};
+      if (window.location.origin != "https://pandadoodle.lucamoller.com") {
+        statsigExtraParams['environment'] = {tier: 'development'};
+      }
+      console.log("using statsigUser: " + JSON.stringify(statsigUser, null, 2));
+      console.log("using statsigExtraParams: " + JSON.stringify(statsigExtraParams, null, 2));
+      statsig.initialize(
+        "client-EiNQPl0nYg8D1EKrmgTzriFMGj9x1aZuwHcpCTIHELX",
+        statsigUser,
+        statsigExtraParams,
+      ).then(
+        () => {
+          statsig.logEvent("game_landing_page");
+
+          let statsigGatesDict = {
+            auto_load_game: statsig.checkGate("auto_load_game"),
+            auto_load_first_stage: statsig.checkGate("auto_load_first_stage"),
+            skip_score_animation: statsig.checkGate("skip_score_animation"),
+          };
+          console.log("Using statsigGatesDict: " + JSON.stringify(statsigGatesDict, null, 2));
+          statsigGates = JSON.stringify(statsigGatesDict);
+          statsigEnabled = true;
+        });
+
+    }, 100);
+  }
+</script>
+
+</html>

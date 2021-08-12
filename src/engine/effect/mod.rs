@@ -1,0 +1,23 @@
+pub mod chained_effect;
+pub mod effect;
+pub mod effect_manager;
+pub mod ratio_progression;
+pub mod set_effect;
+pub mod vector_affector;
+pub mod wait_affector;
+
+pub use chained_effect::ChainedEffect;
+pub use effect::Effect;
+pub use effect::EffectImpl;
+pub use effect::EffectTrait;
+pub use effect_manager::EffectManager;
+pub use effect_manager::EffectManagerTrait;
+pub use ratio_progression::ExpProgression;
+pub use ratio_progression::ExpTransProgression;
+pub use ratio_progression::LinearProgression;
+pub use ratio_progression::QuadraticProgression;
+pub use ratio_progression::RatioProgressionTrait;
+pub use set_effect::SetEffect;
+pub use vector_affector::VectorAffectorF1;
+pub use vector_affector::VectorAffectorF2;
+pub use wait_affector::WaitAffector;
