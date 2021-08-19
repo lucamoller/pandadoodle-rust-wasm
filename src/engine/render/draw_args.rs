@@ -41,6 +41,24 @@ pub struct DrawImageOptionalArgs {
   pub subpixel_precision: bool,
 }
 
+pub const PARTIAL_REGION_OFFSET_DEFAULT: F2 = F2 { x: 0.0, y: 0.0 };
+pub const PARTIAL_REGION_SIZE_DEFAULT: F2 = F2 { x: 1.0, y: 1.0 };
+
+impl Default for DrawImageOptionalArgs {
+  fn default() -> DrawImageOptionalArgs {
+    return DrawImageOptionalArgs {
+      color: DrawColor::default(),
+      rotation: 0.0,
+      anchor_point: F2 { x: 0.5, y: 0.5 },
+      opacity: 1.0,
+      partial_region_offset: PARTIAL_REGION_OFFSET_DEFAULT,
+      partial_region_size: PARTIAL_REGION_SIZE_DEFAULT,
+      composite_operation: None,
+      subpixel_precision: false,
+    };
+  }
+}
+
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub struct DrawColor {
   pub r: u8,
@@ -68,24 +86,6 @@ impl Default for DrawColor {
       r: 255,
       g: 255,
       b: 255,
-    };
-  }
-}
-
-pub const PARTIAL_REFION_OFFSET_DEFAULT: F2 = F2 { x: 0.0, y: 0.0 };
-pub const PARTIAL_REGION_SIZE_DEFAULT: F2 = F2 { x: 1.0, y: 1.0 };
-
-impl Default for DrawImageOptionalArgs {
-  fn default() -> DrawImageOptionalArgs {
-    return DrawImageOptionalArgs {
-      color: DrawColor::default(),
-      rotation: 0.0,
-      anchor_point: F2 { x: 0.5, y: 0.5 },
-      opacity: 1.0,
-      partial_region_offset: PARTIAL_REFION_OFFSET_DEFAULT,
-      partial_region_size: PARTIAL_REGION_SIZE_DEFAULT,
-      composite_operation: None,
-      subpixel_precision: false,
     };
   }
 }

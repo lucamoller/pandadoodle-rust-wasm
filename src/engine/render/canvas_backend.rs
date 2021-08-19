@@ -21,7 +21,7 @@ fn get_source_offset(
 ) -> Option<SourceOffset> {
   let partial_region_offset = &args.optional.partial_region_offset;
   let partial_region_size = &args.optional.partial_region_size;
-  if *partial_region_offset != PARTIAL_REFION_OFFSET_DEFAULT
+  if *partial_region_offset != PARTIAL_REGION_OFFSET_DEFAULT
     || *partial_region_size != PARTIAL_REGION_SIZE_DEFAULT
   {
     let mut offset = SourceOffset {
