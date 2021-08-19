@@ -6,7 +6,7 @@ For more information, check out the article I wrote ([Rewriting my mobile game i
 
 This code was written for fun and originally for my eyes only. I tried to clean/organize things up a bit (believe me it was much messier) in order to share it, but there's so much more that could be done. Also, this code was not intended to be "rusty". On the contrary, I was trying to see how far I could go by writing non-rusty code in Rust (I talk more about this in the [article](https://lucamoller.medium.com/rewriting-my-mobile-game-in-rust-targeting-wasm-1f9f82751830) mentioned above). So please forgive me if something hurts your eyes :)
 
-For someone else trying to develop games with Rust+WASM, I think the most useful part of this repository is the [engine module](https://github.com/lucamoller/pandadoodle-rust-wasm/tree/main/src/engine). It contains the basic functionality for interacting with the browser APIs (like rendering on Canvas2d and input) and also basic frameworks/utilities the game relies on for animations, UI, etc. The code there is fully independent from the game logic and doesn't depend on any game specific logic/types (I guess I could have extracted it in a separate crate). It's not a generic engine with a broad set of features though, it contains exactly the features the required by the game, which were implemented as needed haha.
+For someone trying to develop games with Rust+WASM, I think the most useful part of this repository is the [engine module](https://github.com/lucamoller/pandadoodle-rust-wasm/tree/main/src/engine). It contains the basic functionality for interacting with the browser APIs (like rendering on Canvas2d and input) and also basic frameworks/utilities the game relies on for animations, UI, etc. The code there is fully independent from the game logic and doesn't depend on any game specific logic/types (I guess I could have extracted it in a separate crate). It's not a generic engine with a broad set of features though, it contains exactly the features the required by the game, which were implemented as needed haha.
 
 This repository does not contain all assets to build the functioning Panda Doodle game (static resources such as images, sounds and also puzzle levels descriptions were left out), but it contains all the Rust/JS code used by the game with hopes that someone can learn/reuse something from it. The code should compile, but trying to run the compiled game will fail on the steps that require those assets.
 
@@ -59,5 +59,3 @@ npm test -- --safari
 * The `src` folder contains your Rust code.
 
 * The `static` folder contains any files that you want copied as-is into the final build.
-
-* The `tests` folder contains your Rust unit tests.
