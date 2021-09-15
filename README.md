@@ -8,8 +8,9 @@ This code was written for fun and originally for my eyes only. I tried to clean/
 
 For someone trying to develop games with Rust+WASM, I think the most useful part of this repository is the [engine module](https://github.com/lucamoller/pandadoodle-rust-wasm/tree/main/src/engine). It contains the basic functionality for interacting with the browser APIs (like rendering on Canvas2d and input) and also basic frameworks/utilities the game relies on for animations, UI, etc. The code there is fully independent from the game logic and doesn't depend on any game specific logic/types (I guess I could have extracted it in a separate crate). It's not a generic engine with a broad set of features though, it contains exactly the features the required by the game, which were implemented as needed haha.
 
-This repository does not contain all assets to build the functioning Panda Doodle game (static resources such as images, sounds and also puzzle levels descriptions were left out), but it contains all the Rust/JS code used by the game with hopes that someone can learn/reuse something from it. The code should compile, but trying to run the compiled game will fail on the steps that require those assets.
+~~This repository does not contain all assets to build the functioning Panda Doodle game (static resources such as images, sounds and also puzzle levels descriptions were left out), but it contains all the Rust/JS code used by the game with hopes that someone can learn/reuse something from it. The code should compile, but trying to run the compiled game will fail on the steps that require those assets.~~
 
+This repository contains all assets (including images, sounds and stages data) necessary to build and run the game.
 
 ## How to install
 

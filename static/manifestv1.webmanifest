@@ -1,0 +1,15 @@
+{
+  "description": "Panda Doodle is a challenging drawing puzzle game. Link paws to doodles using the matching colors. Draw over another color to mix them and create a new color. Try to use the least amount of ink to get 3 stars!",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "/static/icon_original.png",
+      "sizes": "700x700",
+      "purpose": "any maskable"
+    }
+  ],
+  "name": "Panda Doodle",
+  "orientation": "portrait",
+  "start_url": "https://pandadoodle.lucamoller.com/?mode=pwa",
+  "theme_color": "#000000"
+}
