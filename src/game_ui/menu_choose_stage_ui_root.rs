@@ -338,6 +338,7 @@ impl MenuChooseStageUiRoot {
     let credits_container = UiContainer::new();
     {
       credits_container.set_visible(false);
+      credits_container.set_position(F2 { x: 0.0, y: 0.3 });
       container.add_child(credits_container.clone());
 
       let luca = UiText::new();
@@ -390,55 +391,55 @@ impl MenuChooseStageUiRoot {
       natalia_role.set_color(DrawColor { r: 0, g: 0, b: 0 });
       credits_container.add_child(natalia_role);
 
-      let donation_line1 = UiText::new();
-      donation_line1.set_text(String::from("Enjoyed the game?"));
-      donation_line1.set_position(F2 { x: 0.5, y: 1.0 });
-      donation_line1.set_font_size(0.10);
-      donation_line1.set_alignment(TextAlignment::Center);
-      donation_line1.set_border(true);
-      credits_container.add_child(donation_line1);
+      // let donation_line1 = UiText::new();
+      // donation_line1.set_text(String::from("Enjoyed the game?"));
+      // donation_line1.set_position(F2 { x: 0.5, y: 1.0 });
+      // donation_line1.set_font_size(0.10);
+      // donation_line1.set_alignment(TextAlignment::Center);
+      // donation_line1.set_border(true);
+      // credits_container.add_child(donation_line1);
 
-      let donation_line2 = UiText::new();
-      donation_line2.set_text(String::from("Consider making a donation =)"));
-      donation_line2.set_position(F2 { x: 0.5, y: 1.1 });
-      donation_line2.set_font_size(0.10);
-      donation_line2.set_alignment(TextAlignment::Center);
-      donation_line2.set_border(true);
-      credits_container.add_child(donation_line2);
+      // let donation_line2 = UiText::new();
+      // donation_line2.set_text(String::from("Consider making a donation =)"));
+      // donation_line2.set_position(F2 { x: 0.5, y: 1.1 });
+      // donation_line2.set_font_size(0.10);
+      // donation_line2.set_alignment(TextAlignment::Center);
+      // donation_line2.set_border(true);
+      // credits_container.add_child(donation_line2);
 
-      let btn_donate = UiButton::new(
-        context.texture_manager.gui_btn_wood.clone(),
-        context.texture_manager.gui_btn_wood_pressed.clone(),
-      );
-      btn_donate.sprite.set_color(DrawColor {
-        r: 255,
-        g: 255,
-        b: 180,
-      });
-      btn_donate.set_size_x(240.0 / 480.0);
-      btn_donate.set_size_y(82.0 / 480.0);
-      btn_donate.set_position(F2 { x: 0.5, y: 1.25 });
-      btn_donate
-        .on_released_event
-        .add(Box::new(|context: &mut Context, _ui_touch: &UiTouch| {
-          context
-            .window
-            .open_with_url("https://www.paypal.com/donate?hosted_button_id=R38K7FJGVP6EY")
-            .expect("window.open_with_url_and_target failed");
-        }));
-      btn_donate.set_sound_on_released(context.audio_manager.click.clone());
-      let btn_donate_text = UiText::new();
-      btn_donate_text.set_text(String::from("Donate"));
-      btn_donate_text.set_font_size(75.0 / 480.0);
-      btn_donate_text.set_alignment(TextAlignment::Center);
-      btn_donate_text.set_color(DrawColor {
-        r: 255,
-        g: 255,
-        b: 200,
-      });
-      btn_donate_text.set_border(true);
-      btn_donate.container.add_child(btn_donate_text);
-      credits_container.add_child(btn_donate.clone());
+      // let btn_donate = UiButton::new(
+      //   context.texture_manager.gui_btn_wood.clone(),
+      //   context.texture_manager.gui_btn_wood_pressed.clone(),
+      // );
+      // btn_donate.sprite.set_color(DrawColor {
+      //   r: 255,
+      //   g: 255,
+      //   b: 180,
+      // });
+      // btn_donate.set_size_x(240.0 / 480.0);
+      // btn_donate.set_size_y(82.0 / 480.0);
+      // btn_donate.set_position(F2 { x: 0.5, y: 1.25 });
+      // btn_donate
+      //   .on_released_event
+      //   .add(Box::new(|context: &mut Context, _ui_touch: &UiTouch| {
+      //     context
+      //       .window
+      //       .open_with_url("https://www.paypal.com/donate?hosted_button_id=R38K7FJGVP6EY")
+      //       .expect("window.open_with_url_and_target failed");
+      //   }));
+      // btn_donate.set_sound_on_released(context.audio_manager.click.clone());
+      // let btn_donate_text = UiText::new();
+      // btn_donate_text.set_text(String::from("Donate"));
+      // btn_donate_text.set_font_size(75.0 / 480.0);
+      // btn_donate_text.set_alignment(TextAlignment::Center);
+      // btn_donate_text.set_color(DrawColor {
+      //   r: 255,
+      //   g: 255,
+      //   b: 200,
+      // });
+      // btn_donate_text.set_border(true);
+      // btn_donate.container.add_child(btn_donate_text);
+      // credits_container.add_child(btn_donate.clone());
     }
 
     let effect_show_credits = Effect::new_within_effect_manager(
