@@ -140,9 +140,6 @@ impl GameMode {
     let stage_index = context
       .achievments_manager
       .get_stage_index(book.number(), stage_number);
-    context
-      .statsig_bindings
-      .log_event_with_i32_value("stage_view", stage_index as i32);
 
     self.stage_manager.clear();
     let new_stage = Stage::new(context, stage_data);
@@ -154,9 +151,6 @@ impl GameMode {
     let stage_index = context
       .achievments_manager
       .get_stage_index(self.book.get().number(), self.stage_number.get());
-    context
-      .statsig_bindings
-      .log_event_with_i32_value("stage_completed", stage_index as i32);
 
     self.events.add_event(IngameUiEvent::Victory(VictoryParams {
       score: self.stage.borrow().get_current_score(),

@@ -73,7 +73,6 @@ pub struct Context {
   pub game_mode: RefCell<Option<Rc<GameMode>>>,
 
   pub show_fps: bool,
-  pub statsig_bindings: StatsigBindings,
 }
 
 impl Context {
@@ -169,7 +168,6 @@ impl Context {
       game_mode: RefCell::new(None),
 
       show_fps: LocalStorageUtil::read(local_storage.as_ref(), "show_fps_key").unwrap_or(false),
-      statsig_bindings: StatsigBindings::new(),
     };
   }
 

@@ -198,14 +198,6 @@ impl UiElementTrait<Context> for LandingPageUiRoot {
         }
       }
       LandingPageState::Ready => {
-        if context
-          .statsig_bindings
-          .statsig_gates
-          .borrow()
-          .auto_load_game
-        {
-          self.events.add_event(LandingPageEvent::StartLoad);
-        }
       }
       LandingPageState::WaitingLoaders => {
         // // Wait for audio and textures

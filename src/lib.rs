@@ -9,14 +9,12 @@ mod draw_depths;
 mod engine;
 mod game;
 mod game_ui;
-mod statsig_bindings;
 mod texture_manager;
 
 use crate::engine::*;
 pub use context::*;
 use game::game_mode::GameMode;
 use game_ui::*;
-use statsig_bindings::*;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::console;
@@ -64,7 +62,6 @@ fn run_loop(app_shared: Shared<App>) {
     {
       let mut app_mut_ref = app_shared.borrow_mut();
       let mut app = &mut *app_mut_ref;
-      app.context.statsig_bindings.check_statsig_enabled();
       app.context.update_timestamp(timestamp as F1);
       app.context.check_screen_updated();
       app.fps_tracker.update_fps(&mut app.context);

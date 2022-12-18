@@ -615,11 +615,6 @@ impl UiElementTrait<Context> for IngameUiRoot {
     if self.victory_ui.start_score_count.get() {
       if self.victory_ui.effect_hide_victory_next.active.get()
         || self.victory_ui.effect_hide_victory_restart.active.get()
-        || context
-          .statsig_bindings
-          .statsig_gates
-          .borrow()
-          .skip_score_animation
       {
         self
           .victory_ui

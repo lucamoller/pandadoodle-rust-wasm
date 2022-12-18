@@ -479,21 +479,6 @@ impl UiRootTrait<Context> for MainMenuUiRoot {
   fn on_back_from(&self, _context: &mut Context) {}
   fn on_navigate_to(&self, context: &mut Context) {
     context.audio_player.play_song(&context.audio_manager.song2);
-    if context
-      .statsig_bindings
-      .statsig_gates
-      .borrow()
-      .auto_load_first_stage
-      && context.achievments_manager.get_total_stars() == 0
-    {
-      console_log_with_div!("starting first stage automatically");
-      context
-        .ui_events
-        .add_event(UiEvent::LoadGame(LoadGameParams {
-          book: Book::Panda,
-          stage_number: 0,
-        }));
-    }
   }
   fn on_navigate_from(&self, _context: &mut Context) {}
   fn on_reactivate(&self, _context: &mut Context) {}

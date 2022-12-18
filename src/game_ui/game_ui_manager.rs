@@ -33,15 +33,11 @@ impl GameUiManager {
             .switch_to_page(Rc::new(LandingPageUiRoot::new(context)), context);
         }
         UiEvent::LoadMainMenu => {
-          context.statsig_bindings.log_event("main_menu_view");
           self
             .ui_manager
             .switch_to_page(Rc::new(MainMenuUiRoot::new(context)), context);
         }
         UiEvent::LoadMenuChooseStage => {
-          context
-            .statsig_bindings
-            .log_event("menu_choose_stages_view");
           self
             .ui_manager
             .push_page_on_stack(MenuChooseStageUiRoot::new(context), context);
